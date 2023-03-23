@@ -1,0 +1,13 @@
+.counter-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
