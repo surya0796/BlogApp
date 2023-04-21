@@ -25,7 +25,7 @@ const postSlice = createSlice({
             reducer(state, action) {
                 state.postsData.push(action.payload)
             },
-            prepare(title, content, userId) {
+            prepare(title, content, userId, reactions) {
                 return {
                     payload: {
                         id: nanoid(),
@@ -43,7 +43,9 @@ const postSlice = createSlice({
                     }
                 }
             }
-            // prepare creates the action.payload object when you need 
+            // prepare creates the action.payload object using the states the component is using. prepare runs before reducer.
+            // In this code postAdded reducer with prepare is not used, it was written initially but after moving to async thunk and
+            //  direclty sending the postsdata to the API, it was left behind as a note, on how to write reducers without async-thunk. 
         },
         reactionAdded(state, action) {
             const { postId, reaction } = action.payload
@@ -70,7 +72,9 @@ const postSlice = createSlice({
                     }
                     return post
                 })
-                state.postsData = state.postsData.concat(loadedPosts) // I forgot to assign value of concated array to the state.postsData and didn't got the data with no errors. So, it's is important to assign it to the state. 
+                state.postsData = state.postsData.concat(loadedPosts) 
+                // I forgot to assign the value of concated array to the state.postsData, but didn't got the or errors. Eventually found out
+                //  that it's important to assign it to the state. 
             })
             .addCase(fetchPosts.rejected, (state, action) => {
                 state.status = 'failed'

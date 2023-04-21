@@ -5,6 +5,7 @@ import PostsList from './features/posts/PostsList';
 import HomeLayout from './Layout/Home';
 import Header from './components/Header';
 import { Routes } from 'react-router-dom';
+import SinglePostPage from './features/posts/SinglePostPage';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<PostsList />} />
-          <Route path="post" element={<AddPostForm />} />
+          <Route path=":postId" element={<SinglePostPage />}/>
+          <Route path="add" element={<AddPostForm />} />
         </Route>
       </Routes>
     </>
